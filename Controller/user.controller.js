@@ -15,11 +15,11 @@ export const createUser = async (request, response, next) => {
         if (!errors.isEmpty())
             return response.status(400).json({ error: "Bad request", errorMessages: errors.array() });
         const { name, email, contact, password } = request.body;
-        const existing = await User.findOne({ email });
+        // const existing = await User.findOne({ email });
 
-        if (existing) {
-            return response.status(409).json({ error: "Email already registered" });
-        }
+        // if (existing) {
+        //     return response.status(409).json({ error: "Email already registered" });
+        // }
 
 
 
@@ -70,13 +70,13 @@ export const login = async (request, response, next) => {
         if (!user)
             return response.status(401).json({ error: "User does not exist" });
 
-        if (!user.isVerified)
-            return response.status(403).json({ error: "Account not verified" });
+        // if (!user.isVerified)
+        //     return response.status(403).json({ error: "Account not verified" });
 
         const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch)
+        if (!isMatch){
             return response.status(401).json({ error: "Invalid password" });
-
+        }
         return response.status(200).json({ message: "Login successful", user });
     } catch (err) {
         console.log(err);
