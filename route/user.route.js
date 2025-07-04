@@ -19,7 +19,7 @@ const router = express.Router();
 
 // router.post("/",auth);
 
-router.post("/createuser",createUser)
+router.post("/",createUser)
 router.post("/verification",verifyAccount);
 router.get("/",getAllUser);
 router.post("/login",login);
