@@ -15,17 +15,22 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    password: {
-        type: String,
-        required: true,
-        set: (value) => {
-            console.log("settter executed..");
-            const saltKey = bcrypt.genSaltSync(12);
-            value = bcrypt.hashSync(value, saltKey);
-            return value;
-        }
+    // password: {
+    //     type: String,
+    //     required: true,
+    //     set: (value) => {
+    //         console.log("settter executed..");
+    //         // const saltKey = bcrypt.genSaltSync(12);
+    //         // value = bcrypt.hashSync(value, saltKey);
+    //         return value;
+    //     }
 
-    },
+    // },
+    password: {
+  type: String,
+  required: true,
+},
+
     contact: {
         type: String,
         required: true,
@@ -36,10 +41,28 @@ const userSchema = new mongoose.Schema({
         imageName: String,
         address: String
     },
+   role: {
+    type: String,
+    enum: ["crafter", "buyer"],
+    required: true
+},
+profilePicture:
+ {
+     type: String
+     },
+
     isVerified: {
         type: Boolean,
         default: false
-    }
+    },
+//     price: {
+//   type: Number,
+//   required: true
+// },
+// quantity: {
+//   type: Number,
+//   required: true
+// }
 
 }, { toJSON: { getters: true } }, { versionKey: false });
 

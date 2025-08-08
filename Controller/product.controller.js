@@ -2,7 +2,7 @@ import { validationResult } from "express-validator";
 import express, { request, response } from "express";
 import nodemailer from "nodemailer";
 import { Product } from "../model/product.model.js";
-
+import {User} from "../model/user.model.js";
 
 
 export const createProduct = async(request,response,next)=>{
@@ -18,8 +18,8 @@ export const createProduct = async(request,response,next)=>{
 
 export const getAllProduct = async(request,response,next)=>{
     try{
-      const product = await Product.find();
-      return response.status(200).json({message:"All products Found Successfully"});
+      const product = await Product.find().populate("createdBy","name email");
+      return response.status(200).json({message:"All products Found Successfully",data:product});
     }catch(err){
         console.log(err);
         return response.status(500).json({error:"Internal server error"});

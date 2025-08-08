@@ -1,5 +1,5 @@
 import mongoose, { get, version } from "mongoose";
-import bcrypt from "bcryptjs";
+import { User } from "../model/user.model.js";
 
 const productSchema = new mongoose.Schema({
     title:{
@@ -34,9 +34,10 @@ const productSchema = new mongoose.Schema({
     },
     isAvailable:{
         type:Boolean,
+        default:true,
         required:true,
 
     }
 });
 
-export const Product = mongoose.model("product",productSchema);
+export const Product = mongoose.model("Product",productSchema);
